@@ -13,7 +13,7 @@ async function getVideoGameByName ( req, res){
             name: videogame.name || 'NOT FOUND',
             description: videogame.description  || 'NOT FOUND',
             image: videogame.background_image || 'NOT FOUND',
-            updated: videogame.updated || 'NOT FOUND',
+            released: videogame.released|| 'NOT FOUND',
             rating: videogame.rating || 'NOT FOUND',
             platforms: videogame.platforms.map((platform) => {
                 return platform.platform.name

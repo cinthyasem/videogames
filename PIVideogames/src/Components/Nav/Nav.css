@@ -1,0 +1,24 @@
+.divNav {
+    display: flex;
+    justify-content: space-between;
+    border: solid 3px blue;
+    border-radius: 20px;
+    background-color: aqua;
+    height: 65px;
+}
+
+.inputNav{
+    margin-right: 10px;
+    margin-top: 25px;
+
+}
+
+.buttonNav {
+    margin-left: 15px;
+    margin-top: 25px;
+    border-radius: 15px;
+}
+
+button{
+    margin-right: 10px;
+}

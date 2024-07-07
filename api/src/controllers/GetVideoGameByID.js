@@ -17,7 +17,7 @@ async function getVideoGamesByID( req, res){
       name: responseData.name || 'NOT FOUND',
       description: responseData.description_raw || 'NOT FOUND', // Usamos 'description_raw' para obtener una descripción completa
       image: responseData.background_image || 'NOT FOUND',
-      updated: responseData.updated || 'NOT FOUND',
+      released: responseData.released || 'NOT FOUND',
       rating: responseData.rating || 'NOT FOUND',
       platforms: responseData.platforms ? responseData.platforms.map(platform => platform.platform.name) : 'NOT FOUND'
     };
