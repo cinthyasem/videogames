@@ -1,9 +1,8 @@
-// reducers/index.js
 import { combineReducers } from 'redux';
-import counterReducer from './counterSlice';
+import gamesReducer from './gamesSlice';
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  games: gamesReducer,
 });
 
 export default rootReducer;

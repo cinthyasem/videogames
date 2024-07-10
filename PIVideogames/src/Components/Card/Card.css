@@ -1,0 +1,76 @@
+/* Card.css */
+.CardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: #0d0d2b; /* Fondo oscuro inspirado en galaxias */
+}
+
+.Card {
+    width: 220px; /* Ajusta el tamaño de la card si es necesario */
+    border: solid 1px #00bfff; /* Borde azul claro */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    background: linear-gradient(145deg, #0a0a23, #1a1a40); /* Efecto de degradado */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0 0 15px #00bfff; /* Sombra y brillo azul */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transición suave */
+}
+
+.Card:hover {
+    transform: scale(1.05); /* Aumenta de tamaño al pasar el ratón */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7), 0 0 25px #00bfff; /* Sombra más intensa */
+}
+
+.Card img {
+    width: 100%; /* Ajusta la imagen al 100% del ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 150px; /* Establece una altura máxima para evitar que las imágenes sean demasiado altas */
+    border-radius: 5px; /* Borde redondeado en la imagen */
+    object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor sin distorsión */
+}
+
+.Id_Card {
+    color: #00bfff; /* Texto azul claro */
+    font-family: 'Orbitron', sans-serif; /* Tipografía temática */
+    margin-bottom: 10px;
+}
+
+.Card_h4, .Name_Card {
+    color: #ffffff; /* Texto blanco */
+    font-family: 'Roboto', sans-serif; /* Tipografía más legible */
+    margin: 5px 0;
+}
+
+.Name_Card {
+    font-size: 1.2em;
+    color: #00bfff; /* Texto azul claro */
+}
+
+.Platforms_Card {
+    color: #b0c4de; /* Texto azul claro */
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+
+/*.CardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.Card {
+    width: 200px;
+    border: solid 1px blue;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin: 10px;
+    height: 320px;
+}
+
+.Card img {
+    width: 150px;
+}*/
+

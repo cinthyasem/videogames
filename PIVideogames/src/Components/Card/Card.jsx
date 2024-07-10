@@ -1,4 +1,4 @@
-
+import './Card.css' 
 
 function Card ({ id, name, image, released, rating, platforms}){
     
@@ -10,9 +10,8 @@ function Card ({ id, name, image, released, rating, platforms}){
                     <h4 className="Card_h4"> Rating: { rating } </h4>
                     <h4 className="Card_h4"> Released: { released } </h4>
                     <h2 className="Name_Card"> Name: { name }</h2>
-                    <img className="Image_Card" src={ image }  />
+                    <img className="Image_Card" src={ image } />
                     
-
                 </div>
 
             </div>
