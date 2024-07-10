@@ -7,12 +7,15 @@ import Home from "./Components/Home/Home"
 import Nav from "./Components/Nav/Nav"
 import LandingPage from "./Components/LandingPage/LandingPage"
 //el import 8 son metodos de router dom PARA CONFIGURAR LAS RUTAS
-import { Routes, Route  } from 'react-router-dom'
+import { Routes, Route, useLocation  } from 'react-router-dom'
 //esto es para poder usar el metodo useEffect
 import { useEffect } from "react"
 
 
+
 function App() {
+
+  const { pathname } = useLocation ();
 
   const dispatch = useDispatch();
   
@@ -21,9 +24,12 @@ function App() {
   }, [dispatch]);
  
 
+    //si el pathname es distinto a '/'se va a mostrar la barra de navegacion 
   return (
     <>
-    <Nav />
+    
+    { pathname !== '/' && <Nav /> }
+    
       
         <Routes> 
          <Route path="/" element={<LandingPage/>}/>

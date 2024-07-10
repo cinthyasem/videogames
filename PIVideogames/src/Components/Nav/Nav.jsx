@@ -16,7 +16,7 @@ function Nav( ){
                 <Link to='/form'>
                     <button className="buttonNav">Create Video Game</button>
                 </Link>
-               
+                
             </div>
             <div>
                 <input type="text"
