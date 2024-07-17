@@ -10,7 +10,8 @@ import LandingPage from "./Components/LandingPage/LandingPage"
 import { Routes, Route, useLocation  } from 'react-router-dom'
 //esto es para poder usar el metodo useEffect
 import { useEffect } from "react"
-
+import Detail from "./Components/Detail/Detail"
+import "./App.css"
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
     //si el pathname es distinto a '/'se va a mostrar la barra de navegacion 
   return (
-    <>
+    <div className="divApp">
     
     { pathname !== '/' && <Nav /> }
     
@@ -35,10 +36,10 @@ function App() {
          <Route path="/" element={<LandingPage/>}/>
          <Route path="/home" element={<Home/>}/>
          <Route path="/form" element={<FormVideoGame/>}/>
-
+         <Route path="/detail/:id" element={<Detail/>}/>
         </Routes>
       
-    </>
+    </div>
   )
 }
 

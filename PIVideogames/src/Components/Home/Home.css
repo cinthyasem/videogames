@@ -1,0 +1,11 @@
+.divFiltersCards{
+    display: flex;
+    justify-content: space-between;
+    
+    }
+
+.filters{
+    background-color: #0d0d2b;
+    width: 20%;
+    color: #00bfff;
+}

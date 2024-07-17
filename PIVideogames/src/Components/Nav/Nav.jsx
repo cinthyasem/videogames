@@ -22,7 +22,6 @@ function Nav( ){
                 <input type="text"
                        className="inputNav" />
                 <button>Search</button>
-
             </div>
         </div>
     )

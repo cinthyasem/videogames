@@ -1,5 +1,13 @@
-.divForm {
-    background-color: black;
-    height: 10px;
-
+.FormVideoGame {
+    display: flex;
+        
 }
+
+.divInputLabel{
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+

@@ -14,6 +14,7 @@ async function getAllVideoGames (req, res) {
             image: videogame.background_image || 'NOT FOUND',
             released: videogame.released || 'NOT FOUND',
             rating: videogame.rating || 'NOT FOUND',
+            genres: videogame.genres.map((genre) => genre.name || 'NOT FOUND'),
             platforms: videogame.platforms.map((platform) => {
                 return platform.platform.name
             })
