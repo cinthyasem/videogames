@@ -3,16 +3,18 @@ import Card from '../Card/Card';
 import { useState, useEffect } from 'react';
 import './Home.css';
 
-function Home() {
+
+function Home( { searchString } ) {
     // Tomar el estado del store de redux para renderizar las cartas en el return
     const games = useSelector((state) => state.games);
 
     // Lógica para el paginado
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
+    const itemsPerPage = 15;
 
     // Lógica de filtros
     const [localFilters, setLocalFilters] = useState({
+        id: 'All',
         name: '',
         genres: 'All',
         platforms: 'All',
@@ -22,6 +24,17 @@ function Home() {
         maxReleased: '',
     });
 
+    
+     // Actualizar localFilters.name cuando searchString cambie
+     useEffect(() => {
+        setLocalFilters(prevFilters => ({
+            ...prevFilters,
+            name: searchString
+        }));
+    }, [searchString]);
+
+    console.log(localFilters);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setLocalFilters({ ...localFilters, [name]: value });
@@ -29,10 +42,12 @@ function Home() {
 
     // Filtrar juegos según los filtros locales
     const filteredGames = games.filter(game => {
-        const { name, genres, platforms, minRating, maxRating, minReleased, maxReleased } = localFilters;
+        const { id, name, genres, platforms, minRating, maxRating, minReleased, maxReleased } = localFilters;
+       
         
         const matchesName = game.name.toLowerCase().includes(name.toLowerCase());
         const matchesGenre = genres === 'All' || game.genres.includes(genres);
+       
 
         // console.log(`Estos son todos los generos de los juegos ${game.genres}`); 
         // console.log(`Este es el genro de nuestro filtro ${genres}`);
@@ -43,8 +58,20 @@ function Home() {
         const matchesMinReleased = minReleased === '' || new Date(game.released) >= new Date(minReleased);
         const matchesMaxReleased = maxReleased === '' || new Date(game.released) <= new Date(maxReleased);
 
+        const isFromDataBase = id === 'DataBase';
+    const isFromAPI = id === 'API';
+    const idContainsLetters = /[a-zA-Z]/.test(`${game.id}`);
+    
+    if (id === 'All') {
+        // Si se selecciona 'All', mostrar todos los juegos sin importar la fuente de datos
         return matchesName && matchesGenre && matchesPlatform && matchesMinRating && matchesMaxRating && matchesMinReleased && matchesMaxReleased;
-    });
+    } else if ((isFromDataBase && idContainsLetters) || (isFromAPI && !idContainsLetters)) {
+        // Filtrar según las condiciones específicas de DataBase y API
+        return matchesName && matchesGenre && matchesPlatform && matchesMinRating && matchesMaxRating && matchesMinReleased && matchesMaxReleased;
+    }
+    
+    return false; // No cumplir la condición deseada
+});
 
     // Calcular los productos que se mostrarán en la página actual
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -84,6 +111,19 @@ function Home() {
                 <div className='filters'>
                     <h1>Filters</h1>
                     <div>
+                        <h3>Origin</h3>
+                        <div>
+                                <select name="id"
+                                    onChange={handleInputChange}
+                                    value={localFilters.id}
+                                    >
+                                    <option>All</option>
+                                    <option>API</option>
+                                    <option>DataBase </option>
+                                </select>
+                        </div>
+                    </div>
+                    <div>
                         <h3>Genres</h3>
                         <div>
                             <select 
@@ -97,6 +137,7 @@ function Home() {
                                 <option>Strategy</option>
                             </select>
                         </div>
+                        
                     </div>
                     <div>
                         <h3>Released</h3>

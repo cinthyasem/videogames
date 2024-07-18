@@ -9,12 +9,22 @@ import LandingPage from "./Components/LandingPage/LandingPage"
 //el import 8 son metodos de router dom PARA CONFIGURAR LAS RUTAS
 import { Routes, Route, useLocation  } from 'react-router-dom'
 //esto es para poder usar el metodo useEffect
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Detail from "./Components/Detail/Detail"
 import "./App.css"
 
 
+
 function App() {
+
+  const [searchString, setSearchString] = useState ('')
+
+  const handleChange = (e) => {
+      setSearchString(e.target.value)
+  
+  }
+  
+   
 
   const { pathname } = useLocation ();
 
@@ -29,12 +39,13 @@ function App() {
   return (
     <div className="divApp">
     
-    { pathname !== '/' && <Nav /> }
+    { pathname !== '/' && 
+      <Nav handleChange = {handleChange} /> }
     
       
         <Routes> 
          <Route path="/" element={<LandingPage/>}/>
-         <Route path="/home" element={<Home/>}/>
+         <Route path="/home" element={<Home searchString = {searchString}/>} />
          <Route path="/form" element={<FormVideoGame/>}/>
          <Route path="/detail/:id" element={<Detail/>}/>
         </Routes>

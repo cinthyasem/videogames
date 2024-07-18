@@ -3,9 +3,9 @@ import "./Nav.css"
 import { Link } from 'react-router-dom'
 
 
-function Nav( ){
+function Nav( { handleChange } ){
 
-
+    
     return (
         <div className="divNav">
 
@@ -19,9 +19,11 @@ function Nav( ){
                 
             </div>
             <div>
-                <input type="text"
-                       className="inputNav" />
-                <button>Search</button>
+                <input 
+                    onChange={handleChange}
+                    type="text"
+                    className="inputNav" />
+               
             </div>
         </div>
     )

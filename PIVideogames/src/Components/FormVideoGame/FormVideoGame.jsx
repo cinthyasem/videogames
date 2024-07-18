@@ -48,7 +48,7 @@ function FormVideoGame (){
                     body: JSON.stringify(data),
                     });
             
-                alert('Tu Video Juego se ha creado exitosamente!')
+                alert('Your VideoGame have been posted succesfully!')
                     
                 setData({
                     name: '',
@@ -87,44 +87,46 @@ function FormVideoGame (){
 
                 
         if (!input.released) {
-            errors.released = 'La fecha de lanzamiento es obligatoria.';
+            errors.released = 'The realesed date is  required.';
         } 
 
 
 
         if (!input.platforms) {
-            errors.platforms = 'Las plataformas son obligatorias.';
+            errors.platforms = 'The platforms are required.';
         }
 
 
         if (!input.genres) {
-            errors.genres = 'Los géneros son obligatorios.';
+            errors.genres = 'The genres are required.';
         }
 
 
 
         if (!input.rating) {
-            errors.rating = 'La calificación es obligatoria.';
+            errors.rating = 'The rating is required.';
         } else if (isNaN(input.rating) || input.rating < 0 || input.rating > 5) { //isNan = is not a number
-            errors.rating = 'La calificación debe ser un número entre 0 y 5.';
+            errors.rating = 'The rating most be a number between 0 and 5.';
         }
 
 
 
         if (!input.image) {
-            errors.image = 'La URL de la imagen es obligatoria.';
-        } else if (!/^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/.test(input.image)) {
-            errors.image = 'La URL de la imagen no es válida.';
+            errors.image = 'The URL is required.';
+        } else if (input.image.length > 256 ) {
+            errors.image = 'The URL is too long'
         }
+
+        
 
 
 
         if (!input.description) {
             errors.description = 'La descripción es obligatoria.';
-        } else if (input.description.length < 100) {
-            errors.description = 'La descripción es demasiado corta. Debe tener al menos 100 caracteres.';
-        } else if (input.description.length > 200) {
-            errors.description = 'La descripción es demasiado larga. Debe tener menos de 200 caracteres.';
+        } else if (input.description.length < 50) {
+            errors.description = 'The description is too long. It most contained 100 characteres.';
+        } else if (input.description.length > 256) {
+            errors.description = 'The description is too short. It most conttained 200 characteres.';
         }
 
         return errors;
