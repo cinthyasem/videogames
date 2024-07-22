@@ -16,9 +16,9 @@ import "./App.css"
 
 
 function App() {
-
+  //en este estado tenemos el input de Nav 
   const [searchString, setSearchString] = useState ('')
-
+  //esta funcion toma el valor del input y setea el estado (el input que tenemos en Nav)
   const handleChange = (e) => {
       setSearchString(e.target.value)
   

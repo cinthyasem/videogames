@@ -19,7 +19,7 @@ async function getVideoGamesByID( req, res){
       image: responseData.background_image || 'NOT FOUND',
       released: responseData.released || 'NOT FOUND',
       rating: responseData.rating || 'NOT FOUND',
-      platforms: responseData.platforms ? responseData.platforms.map(platform => platform.platform.name) : 'NOT FOUND'
+      platforms: responseData.platforms ? responseData.platforms.map(platform => platform.platform.name).join(', ') : 'NOT FOUND'
     };
 
     // Envía los datos del videojuego como respuesta

@@ -1,6 +1,6 @@
 .FormVideoGame {
     display: flex;
-        
+    color: white;    
 }
 
 .divInputLabel{
@@ -11,3 +11,21 @@
     justify-content: space-between;
 }
 
+.divInputLabel input, textarea {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.buttonCreate {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    
+}
+
+.divButton{
+    width: 320px;
+    display: flex;
+    justify-content: right ;
+}

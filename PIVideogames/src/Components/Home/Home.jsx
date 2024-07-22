@@ -22,6 +22,9 @@ function Home( { searchString } ) {
         maxRating: '',
         minReleased: '',
         maxReleased: '',
+        nameOrder:'All',
+        ratingOrder:'All',
+
     });
 
     
@@ -43,15 +46,9 @@ function Home( { searchString } ) {
     // Filtrar juegos según los filtros locales
     const filteredGames = games.filter(game => {
         const { id, name, genres, platforms, minRating, maxRating, minReleased, maxReleased } = localFilters;
-       
         
         const matchesName = game.name.toLowerCase().includes(name.toLowerCase());
         const matchesGenre = genres === 'All' || game.genres.includes(genres);
-       
-
-        // console.log(`Estos son todos los generos de los juegos ${game.genres}`); 
-        // console.log(`Este es el genro de nuestro filtro ${genres}`);
-
         const matchesPlatform = platforms === 'All' || game.platforms.includes(platforms);
         const matchesMinRating = minRating === '' || game.rating >= parseFloat(minRating);
         const matchesMaxRating = maxRating === '' || game.rating <= parseFloat(maxRating);
@@ -59,25 +56,37 @@ function Home( { searchString } ) {
         const matchesMaxReleased = maxReleased === '' || new Date(game.released) <= new Date(maxReleased);
 
         const isFromDataBase = id === 'DataBase';
-    const isFromAPI = id === 'API';
-    const idContainsLetters = /[a-zA-Z]/.test(`${game.id}`);
-    
-    if (id === 'All') {
-        // Si se selecciona 'All', mostrar todos los juegos sin importar la fuente de datos
-        return matchesName && matchesGenre && matchesPlatform && matchesMinRating && matchesMaxRating && matchesMinReleased && matchesMaxReleased;
-    } else if ((isFromDataBase && idContainsLetters) || (isFromAPI && !idContainsLetters)) {
-        // Filtrar según las condiciones específicas de DataBase y API
-        return matchesName && matchesGenre && matchesPlatform && matchesMinRating && matchesMaxRating && matchesMinReleased && matchesMaxReleased;
-    }
-    
-    return false; // No cumplir la condición deseada
-});
+        const isFromAPI = id === 'API';
+        const idContainsLetters = /[a-zA-Z]/.test(`${game.id}`);
+        
+        if (id === 'All') {
+            return matchesName && matchesGenre && matchesPlatform && matchesMinRating && matchesMaxRating && matchesMinReleased && matchesMaxReleased;
+        } else if ((isFromDataBase && idContainsLetters) || (isFromAPI && !idContainsLetters)) {
+            return matchesName && matchesGenre && matchesPlatform && matchesMinRating && matchesMaxRating && matchesMinReleased && matchesMaxReleased;
+        }
+        
+        return false; 
+    });
+
+    // Lógica de ordenación
+    const sortedGames = filteredGames.sort((a, b) => {
+        if (localFilters.nameOrder === 'Ascendente') {
+            return a.name.localeCompare(b.name);
+        } else if (localFilters.nameOrder === 'Descendente') {
+            return b.name.localeCompare(a.name);
+        } else if (localFilters.ratingOrder === 'Ascendente') {
+            return a.rating - b.rating;
+        } else if (localFilters.ratingOrder === 'Descendente') {
+            return b.rating - a.rating;
+        }
+        return 0;
+    });
 
     // Calcular los productos que se mostrarán en la página actual
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredGames.slice(indexOfFirstItem, indexOfFirstItem + itemsPerPage); // currentItems son los items que se están mostrando en esa página
-    const totalPages = Math.ceil(filteredGames.length / itemsPerPage);
+    const currentItems = sortedGames.slice(indexOfFirstItem, indexOfFirstItem + itemsPerPage); 
+    const totalPages = Math.ceil(sortedGames.length / itemsPerPage);
 
     // Funciones para cambiar de página
     const handleFirstPage = () => {
@@ -109,6 +118,7 @@ function Home( { searchString } ) {
         <div>
             <div className='divFiltersCards'>
                 <div className='filters'>
+                    
                     <h1>Filters</h1>
                     <div>
                         <h3>Origin</h3>
@@ -122,6 +132,18 @@ function Home( { searchString } ) {
                                     <option>DataBase </option>
                                 </select>
                         </div>
+                    </div>
+                    <div>
+                        <h3>Name</h3>
+                        <select name="nameOrder"
+                                onChange={handleInputChange}
+                                value={localFilters.nameOrder}
+                        >
+                            <option value="All">All</option>
+                            <option value="Ascendente">Ascendente</option>
+                            <option value="Descendente">Descendente</option>
+                        </select>
+
                     </div>
                     <div>
                         <h3>Genres</h3>
@@ -174,6 +196,19 @@ function Home( { searchString } ) {
                                 value={localFilters.maxRating} // Añadido value
                             />
                         </div>
+                        <div>
+                            <h4>Ascendente o descendente</h4>
+                                <select
+                                name='ratingOrder'
+                                onChange={handleInputChange}
+                                value={localFilters.ratingOrder}
+                                >
+                                <option value="All">All</option>
+                                <option value="Ascendente">Ascendete</option> 
+                                <option value="Descendente">Descendente</option>
+                                </select>
+                    
+                        </div>
                     </div>
                     <div>
                         <h3>Platforms</h3>
@@ -208,17 +243,21 @@ function Home( { searchString } ) {
                 </div>
 
                 <div className="CardsContainer">
-                    {currentItems.map((game) => (
-                        <Card
-                            key={game.id}
-                            id={game.id}
-                            name={game.name}
-                            image={game.image}
-                            released={game.released}
-                            rating={game.rating}
-                            platforms={game.platforms}
-                        />
-                    ))}
+                    {currentItems.length > 0 ? (
+                        currentItems.map((game) => (
+                            <Card
+                                key={game.id}
+                                id={game.id}
+                                name={game.name}
+                                image={game.image}
+                                released={game.released}
+                                rating={game.rating}
+                                platforms={game.platforms}
+                            />
+                        ))
+                    ) : (
+                        <div className="NoContentMessage">There are no VideoGames with that name</div>
+                    )}
                 </div>
             </div>
 

@@ -219,8 +219,8 @@ function FormVideoGame (){
                         />
                     </div>
 
-                    <div>
-                        <input type="submit" value="Create" />
+                    <div className='divButton'>
+                        <input className='buttonCreate' type="submit" value="Create" />
                     </div>
                 </div>
             </form>

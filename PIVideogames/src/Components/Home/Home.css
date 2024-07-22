@@ -9,3 +9,38 @@
     width: 20%;
     color: #00bfff;
 }
+
+.filters input, select {
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+.filters h3, h4 {
+    margin-bottom: 2px;
+}
+
+.Pagination{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.Pagination button{
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 9em;
+    width: 3em;
+}
+
+.Pagination button:disabled{
+    background-color: grey;
+}
+
+.NoContentMessage{
+    color:white;
+    
+}

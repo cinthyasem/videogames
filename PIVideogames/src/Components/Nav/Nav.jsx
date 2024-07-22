@@ -18,11 +18,13 @@ function Nav( { handleChange } ){
                 </Link>
                 
             </div>
-            <div>
+            <div> 
                 <input 
                     onChange={handleChange}
                     type="text"
-                    className="inputNav" />
+                    className="inputNav" 
+                    placeholder="Search..."
+                />
                
             </div>
         </div>

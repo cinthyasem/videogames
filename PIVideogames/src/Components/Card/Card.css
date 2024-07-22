@@ -1,22 +1,29 @@
 /* Card.css */
 .CardsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    background-color: #0d0d2b; /* Fondo oscuro inspirado en galaxias */
+    width: 1400px;
+    max-width: calc(100% - 30px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 25px;
+    padding-bottom: 30px; 
 }
 
+
 .Card {
-    width: 220px; /* Ajusta el tamaño de la card si es necesario */
-    border: solid 1px #00bfff; /* Borde azul claro */
+    width: 220px; 
+    height: 260px;
+    border: solid 1px #00bfff; 
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
-    background: linear-gradient(145deg, #0a0a23, #1a1a40); /* Efecto de degradado */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0 0 15px #00bfff; /* Sombra y brillo azul */
-    transition: transform 0.2s, box-shadow 0.2s; /* Transición suave */
+    background: linear-gradient(145deg, #0a0a23, #1a1a40); 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0 0 15px #00bfff; 
+    transition: transform 0.2s, box-shadow 0.2s; 
+   
 }
+
+
 
 .Card:hover {
     transform: scale(1.05); /* Aumenta de tamaño al pasar el ratón */
@@ -29,6 +36,7 @@
     max-height: 150px; /* Establece una altura máxima para evitar que las imágenes sean demasiado altas */
     border-radius: 5px; /* Borde redondeado en la imagen */
     object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor sin distorsión */
+    
 }
 
 .Id_Card {
@@ -48,11 +56,7 @@
     color: #00bfff; /* Texto azul claro */
 }
 
-.Platforms_Card {
-    color: #b0c4de; /* Texto azul claro */
-    font-size: 0.9em;
-    margin-top: 10px;
-}
+
 
 
 /*.CardsContainer {
