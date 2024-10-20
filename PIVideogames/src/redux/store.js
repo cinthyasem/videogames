@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import gamesReducer from './reducers/gamesSlice'; // Esto es un ejemplo; ajusta según la estructura de tu proyecto
+import gamesReducer from './reducers/gamesSlice'; 
 
 const store = configureStore({
   reducer: {
@@ -8,3 +8,5 @@ const store = configureStore({
 });
 
 export default store;
+
+//config general del edo global

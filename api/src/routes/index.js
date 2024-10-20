@@ -1,11 +1,11 @@
 //aca estamos importando la funcion detAllVideoGames 
 const { getAllVideogames } = require ('../controllers/GetAllVideoGames');
-const { getVideoGamesByID } = require ('../controllers/GetVideoGameByID');
+const { getVideogameByID } = require ('../controllers/GetVideoGameByID');
 const { getVideoGameByName } = require('../controllers/GetVideoGamesByName'); 
 const { getGenres } = require('../controllers/GetGenres');
 const { postVideoGames } = require('../controllers/PostVideoGames');
-const {getVideoGamesFromDb} = require ('../controllers/testController');
-const {getGenres2} = require ('../controllers/testGenresController');
+
+
 
 const { Router } = require('express');
 
@@ -27,7 +27,7 @@ const router = Router();
 router.get('/getAllVideogames', getAllVideogames)
 
 //definimos la ruta para obtrener un videojuego por ID
-router.get('/getVideoGameByID/:id', getVideoGamesByID)
+router.get('/getVideoGameByID/:id', getVideogameByID)
 
 //definimos la ruta para obtrener un videojuego por nombre
 router.get('/getVideoGamesByName/:name', getVideoGameByName)
@@ -36,8 +36,10 @@ router.get('/getGenres', getGenres)
 
 router.post('/postVideoGames', postVideoGames)
 
-router.get('/getVideoGamesFromDb', getVideoGamesFromDb)
 
-router.get('/getGenres2', getGenres2)
+
+
+
+
 
 module.exports = router;

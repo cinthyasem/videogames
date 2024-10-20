@@ -15,7 +15,7 @@ async function postVideoGames (req, res) {
         })
 
 
-        if (genres && genres.length>0){
+        if (genres && genres.length > 0){
             const genreIds = [];
             for (let genreName of genres){
                 let [genre] = await Genres.findOrCreate({

@@ -13,7 +13,7 @@ function LandingPage (){
 
         <div className="bienvenida-container">
             <div className="bienvenida-texto">
-                <h1>Bienvenido al PI VideoGames</h1>
+                <h1>Welcome to VideoGames!</h1>
 
                 <Link to='/home'>
                         <button className="buttonHome">Home</button>

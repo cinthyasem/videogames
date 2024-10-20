@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { relations_table, Videogame, Genres } = require('../db');
+const { relations_table, Videogame, Genres } = require('../db'); //estos son mis modelos y tablas de la db que se usaran para consultar y relacionar los datos
 
 async function fetchAllVideogames(url, allVideogames = [], retries = 3, limit = 3) {
   if (limit === 0) {
@@ -9,7 +9,7 @@ async function fetchAllVideogames(url, allVideogames = [], retries = 3, limit = 
 
   try {
     console.log(`Fetching data from: ${url}`);
-    const response = await axios.get(url);
+    const response = await axios.get(url); //aca realizamos una solicitud a la api con axios
     const data = response.data;
 
     console.log(`Fetched ${data.results.length} videogames`);
@@ -21,7 +21,7 @@ async function fetchAllVideogames(url, allVideogames = [], retries = 3, limit = 
       image: videogame.background_image || 'NOT FOUND',
       released: videogame.released || 'NOT FOUND',
       rating: videogame.rating || 'NOT FOUND',
-      gender: videogame.genres.map((genres) => genres.name),
+      genres: videogame.genres.map((genres) => genres.name).join(', ') || 'NOT FOUND',
       platforms: videogame.platforms.map((platform) => platform.platform.name)
     }));
 
@@ -42,6 +42,8 @@ async function fetchAllVideogames(url, allVideogames = [], retries = 3, limit = 
     }
   }
 }
+
+//aca se crea la funcion que se encarga de hacer la consulta a la api 
 
 async function getAllVideogames(req, res) {
   try {
@@ -65,12 +67,13 @@ async function getAllVideogames(req, res) {
       name: videoGame.name,
       released: videoGame.released,
       platforms: videoGame.platforms,
-      genres: videoGame.Genres.map(genre => genre.name) || '',
+      genres: videoGame.Genres.map(genre => genre.name).join(', ') || 'NOT FOUND',
       rating: videoGame.rating,
       image: videoGame.image,
       description: videoGame.description
     }));
 
+    //aca se combinan los datos de la db y la API
     const videogamesApiDb = [...formatVideogames, ...videogames]
     res.status(200).json(
       videogamesApiDb

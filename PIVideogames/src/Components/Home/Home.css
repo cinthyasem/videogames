@@ -1,46 +1,71 @@
-.divFiltersCards{
+.divFiltersCards {
     display: flex;
-    justify-content: space-between;
     
-    }
-
-.filters{
+    justify-content: space-between;
+    padding: 2em; /* Espacio adicional alrededor de los filtros y tarjetas */
+    background: radial-gradient(circle, #0d0d2b, black); /* Fondo similar al de bienvenida */
+     
+  }
+  
+  .filters {
     background-color: #0d0d2b;
     width: 20%;
     color: #00bfff;
-}
-
-.filters input, select {
-    width: 150px;
-    border-radius: 5px;
-    border: none;
+    padding: 1em; /* Espacio interno dentro del contenedor de filtros */
+    border-radius: 0.5em; /* Bordes redondeados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+  }
+  
+  .filters input,
+  .filters select {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir el padding */
+    border-radius: 0.5em;
+    border: 1px solid #00bfff; /* Borde de color consistente con el diseño */
     background-color: black;
     color: white;
-}
-
-.filters h3, h4 {
-    margin-bottom: 2px;
-}
-
-.Pagination{
+    padding: 0.5em; /* Espacio interno para mayor legibilidad */
+    margin-bottom: 1em; /* Espacio entre los campos */
+  }
+  
+  .filters h3,
+  .filters h4 {
+    margin-bottom: 1em; /* Espacio entre el título y los campos */
+    color: #00bfff; /* Color consistente con el tema */
+  }
+  
+  .Pagination {
     display: flex;
     justify-content: center;
-    color: white;
-}
-
-.Pagination button{
+    color: white; /* Color consistente con el tema */
+    margin-top: 2em; /* Espacio arriba de la paginación */
+  }
+  
+  .Pagination button {
     background-color: black;
-    color: white;
-    border: none;
-    border-radius: 9em;
+    color: #00bfff; /* Color del texto consistente con el tema */
+    border: 1px solid #00bfff; /* Borde consistente con el diseño */
+    border-radius: 1.5em; /* Bordes redondeados para un look más suave */
     width: 3em;
-}
-
-.Pagination button:disabled{
+    height: 3em; /* Tamaño consistente con el ancho */
+    margin: 0 0.5em; /* Espacio entre botones */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transiciones suaves */
+  }
+  
+  .Pagination button:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0 0 15px #00bfff; /* Efecto de sombra */
+  }
+  
+  .Pagination button:disabled {
     background-color: grey;
-}
-
-.NoContentMessage{
-    color:white;
-    
-}
+    color: #333; /* Color de texto para estado deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
+  }
+  
+  .NoContentMessage {
+    color: #00bfff;
+    text-align: center;
+    font-size: 1.5rem; /* Tamaño del texto para mayor visibilidad */
+    margin-top: 2em; /* Espacio encima del mensaje */
+  }
+  

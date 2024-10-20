@@ -7,7 +7,7 @@ function FormVideoGame (){
         name: '',
         released: '',
         platforms: '',
-        genres: [],
+        genres: '',
         rating: '',
         image: '',
         description: '',
@@ -18,12 +18,13 @@ function FormVideoGame (){
     //esta funcion sirve para tomar los datos del input(en los div) y pasarselos a la funcion 
     //que envia los datos al back
     const handleInputChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
+       
+            setData({
+                ...data,
+                [e.target.name]: e.target.value
             });
-            };
-
+        
+    };
         console.log(data);   
         
     
@@ -39,16 +40,22 @@ function FormVideoGame (){
         }
 
         try {
+            const modifiedData = {
+                ...data,
+                genres: data.genres.split(' '),
+            };
+           
+
             const postVideogame = await fetch('http://localhost:3001/postVideoGames', {
                 method: 'POST',
                 headers: {
                     Accept:'application/json',
                     'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data),
+                    body: JSON.stringify(modifiedData),
                     });
             
-                alert('Your VideoGame have been posted succesfully!')
+                alert('Your VideoGame has been posted succesfully!')
                     
                 setData({
                     name: '',
@@ -57,7 +64,7 @@ function FormVideoGame (){
                     image: '',
                     released: '',
                     rating: '',
-                    genres: [],
+                    genres: "",
                 })
 
         } catch (error) {
@@ -70,9 +77,6 @@ function FormVideoGame (){
     //ej: que no permita campos vacios o, informacion erronea.
     const validate = (input) => {
 
-        
-
-
         let errors = {};
         if (!input.name) {
             errors.name = 'The name is required';
@@ -83,25 +87,18 @@ function FormVideoGame (){
         } else if (input.name.length < 2) {
             errors.name = 'The name is too short';
         }
-
-
                 
         if (!input.released) {
-            errors.released = 'The realesed date is  required.';
+            errors.released = 'The realesed date is required.';
         } 
-
-
 
         if (!input.platforms) {
             errors.platforms = 'The platforms are required.';
         }
 
-
-        if (!input.genres) {
+        if (!input.genres || input.genres.length === 0) {
             errors.genres = 'The genres are required.';
         }
-
-
 
         if (!input.rating) {
             errors.rating = 'The rating is required.';
@@ -109,24 +106,18 @@ function FormVideoGame (){
             errors.rating = 'The rating most be a number between 0 and 5.';
         }
 
-
-
         if (!input.image) {
             errors.image = 'The URL is required.';
         } else if (input.image.length > 256 ) {
             errors.image = 'The URL is too long'
         }
 
-        
-
-
-
         if (!input.description) {
-            errors.description = 'La descripción es obligatoria.';
+            errors.description = 'The description most be filled.';
         } else if (input.description.length < 50) {
-            errors.description = 'The description is too long. It most contained 100 characteres.';
+            errors.description = 'The description is too short. It most contained 100 characteres.';
         } else if (input.description.length > 256) {
-            errors.description = 'The description is too short. It most conttained 200 characteres.';
+            errors.description = 'The description is too long. It most contained 256 characteres.';
         }
 
         return errors;
@@ -140,14 +131,14 @@ function FormVideoGame (){
             <form className='FormVideoGame' action='POST' onSubmit={submit}>
                 <div>
                     <h1>Create Your VideoGame</h1>
-                    <h1>You can add more than one genre and Platform to your VideoGame</h1>
+                    
                     <div className='divInputLabel'>
                         <label>Name:</label>
                         <input 
                             onChange={handleInputChange}
                             type='text' 
                             name='name' 
-                            placeholder='name'
+                            placeholder='The name can only contain letters, numbers, and spaces...'
                             value={data.name}
                         />
                     </div>
@@ -170,7 +161,7 @@ function FormVideoGame (){
                             onChange={handleInputChange}
                             type='text' 
                             name='platforms' 
-                            placeholder='platforms'
+                            placeholder='You can add more than one platform to your VideoGame...'
                             value={data.platforms}
                         />
                     </div>
@@ -181,8 +172,9 @@ function FormVideoGame (){
                             onChange={handleInputChange}
                             type='text' 
                             name='genres' 
-                            placeholder='genres'
+                            placeholder='You can add more than one genre to your VideoGame...'
                             value={data.genres}
+
                         />
                     </div>
                     
@@ -192,7 +184,7 @@ function FormVideoGame (){
                             onChange={handleInputChange}
                             type='text' 
                             name='rating' 
-                            placeholder='rating'
+                            placeholder='Rating most be a number between 1 and 5.'
                             value={data.rating}
                         />
                     </div>
@@ -203,7 +195,7 @@ function FormVideoGame (){
                             onChange={handleInputChange}
                             type='text' 
                             name='image' 
-                            placeholder='image'
+                            placeholder='image URL'
                             value={data.image}
                         />
                     </div>
@@ -214,7 +206,7 @@ function FormVideoGame (){
                             onChange={handleInputChange}
                             type='text' 
                             name='description' 
-                            placeholder='description'
+                            placeholder='description...'
                             value={data.description}
                         />
                     </div>

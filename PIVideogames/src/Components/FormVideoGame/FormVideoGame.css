@@ -1,31 +1,64 @@
 .FormVideoGame {
     display: flex;
+    flex-direction: column; /* Organiza los elementos verticalmente */
     color: white;    
+    padding: 20px; /* Añade padding para que el formulario no esté pegado a los bordes */
+    background-color: #0a0a23; /* Mismo color de fondo oscuro que las tarjetas */
+    border-radius: 10px; /* Bordes redondeados para un estilo cohesivo */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Añade sombra para profundidad */
+    width: 100%; /* Asegura que el formulario use todo el ancho disponible */
+    max-width: 600px; /* Limita el ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
 }
 
-.divInputLabel{
-    margin-left: 20px;
-    margin-bottom: 10px;
-    width: 300px;
+.divInputLabel {
+    margin-bottom: 15px; /* Aumenta el margen inferior para separar los campos */
+    width: 100%; /* Usa el 100% del ancho disponible del formulario */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Organiza los elementos verticalmente dentro del div */
+}
+
+.divInputLabel label {
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el campo */
+    font-weight: bold; /* Resalta el texto de las etiquetas */
+    color: #00bfff; /* Color azul que coincide con el tema */
 }
 
 .divInputLabel input, textarea {
-    background-color: black;
+    background-color: #1a1a40; /* Color de fondo oscuro para los campos */
     color: white;
     border-radius: 5px;
+    border: 1px solid #00bfff; /* Borde azul para los campos */
+    padding: 10px; /* Padding interno para mejorar la usabilidad */
+    font-size: 15px; /* Tamaño de fuente consistente con el resto del diseño */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    width: 100%; /* Asegura que los campos usen el ancho completo del contenedor */
+}
+
+.divInputLabel textarea {
+    resize: vertical; /* Permite redimensionar el área de texto verticalmente */
+    min-height: 100px; /* Altura mínima para el área de texto */
 }
 
 .buttonCreate {
-    background-color: black;
-    color: white;
+    background-color: #1a1a40; /* Color de fondo oscuro consistente con los otros elementos */
+    color: #00bfff; /* Color de texto azul para hacer que el botón resalte */
     border-radius: 5px;
-    
+    border: 1px solid #00bfff; /* Borde azul para el botón */
+    padding: 10px 20px; /* Padding para hacer el botón más clickeable */
+    font-size: 15px; /* Tamaño de fuente consistente */
+    cursor: pointer; /* Muestra un cursor de puntero al pasar sobre el botón */
+    transition: background-color 0.2s, color 0.2s; /* Transiciones suaves para el hover */
 }
 
-.divButton{
-    width: 320px;
+.buttonCreate:hover {
+    background-color: #00bfff; /* Cambia el color de fondo al pasar el ratón */
+    color: #000000; /* Cambia el color del texto al pasar el ratón */
+}
+
+.divButton {
     display: flex;
-    justify-content: right ;
+    justify-content: flex-end; /* Alinea el botón a la derecha */
+    margin-top: 20px; /* Añade un margen superior para separar del resto del formulario */
 }

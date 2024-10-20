@@ -1,34 +1,45 @@
 .divNav {
     display: flex;
     justify-content: space-between;
-    background-color: #000000;
+    align-items: center; /* Alinea verticalmente los elementos */
+    background-color: #000000; /* Mismo color de fondo que en las tarjetas */
     height: 65px;
+    padding: 0 15px; /* Padding para coincidir con el diseño del contenedor de tarjetas */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    border-bottom: 1px solid #00bfff; /* Línea inferior para dar un toque de estilo */
 }
 
-.inputNav{
-    margin-right: 10px;
-    margin-top: 25px;
-    background-color: #000000;
+.inputNav {
+    background-color: #1a1a40; /* Color de fondo oscuro similar al de las tarjetas */
     color: white;
     border-radius: 5px;
-    border: 1px solid gray;
+    border: 1px solid #00bfff; /* Borde azul para coincidir con el tema */
     font-size: 15px;
     font-weight: 700;
     width: 250px;
-    height: 25px;
-    
+    height: 35px; /* Ajusta la altura para que sea más consistente con los botones */
+    padding: 0 10px; /* Padding interno para mejorar la usabilidad */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
 }
 
 .buttonNav {
-    margin-left: 15px;
-    margin-top: 25px;
+    background-color: #1a1a40; /* Mismo color de fondo oscuro que el input */
+    color: #00bfff; /* Color de texto para que resalte sobre el fondo oscuro */
     border-radius: 15px;
-    background-color: #000000;
-    color: white;
     font-size: 15px;
-    border: none;
+    border: 1px solid #00bfff; /* Borde azul para hacer eco de las tarjetas */
+    padding: 5px 15px; /* Padding para hacer el botón más clickeable */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    cursor: pointer; /* Muestra un cursor de puntero al pasar por encima */
+    transition: background-color 0.2s, border-color 0.2s; /* Transiciones suaves para efectos visuales */
 }
 
-button{
+.buttonNav:hover {
+    background-color: #00bfff; /* Cambio de color al pasar el ratón sobre el botón */
+    color: #000000; /* Cambia el color del texto al pasar el ratón */
+    border-color: #1a1a40; /* Ajusta el borde en hover */
+}
+
+button {
     margin-right: 10px;
 }

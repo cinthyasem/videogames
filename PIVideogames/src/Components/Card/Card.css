@@ -1,80 +1,63 @@
-/* Card.css */
 .CardsContainer {
-    width: 1400px;
-    max-width: calc(100% - 30px);
-    margin: 0 auto;
+    width: 100%; /* Asegúrate de que el contenedor use el ancho completo disponible */
+    max-width: 1400px; /* Máximo ancho del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 25px;
-    padding-bottom: 30px; 
+    padding: 0 15px; /* Padding lateral para evitar que las tarjetas se salgan */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    overflow: hidden; /* Oculta cualquier contenido desbordante */
+    padding: 30px;
 }
-
 
 .Card {
-    width: 220px; 
-    height: 260px;
-    border: solid 1px #00bfff; 
+    width: 100%; /* Asegúrate de que las tarjetas ocupen el 100% del ancho de su celda */
+    height: 320px;
+    border: solid 1px #00bfff;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
-    background: linear-gradient(145deg, #0a0a23, #1a1a40); 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0 0 15px #00bfff; 
-    transition: transform 0.2s, box-shadow 0.2s; 
-   
+    background: linear-gradient(145deg, #0a0a23, #1a1a40);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0 0 15px #00bfff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    overflow: hidden; /* Asegura que el contenido no se salga */
 }
 
-
-
 .Card:hover {
-    transform: scale(1.05); /* Aumenta de tamaño al pasar el ratón */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7), 0 0 25px #00bfff; /* Sombra más intensa */
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7), 0 0 25px #00bfff;
 }
 
 .Card img {
-    width: 100%; /* Ajusta la imagen al 100% del ancho del contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-    max-height: 150px; /* Establece una altura máxima para evitar que las imágenes sean demasiado altas */
-    border-radius: 5px; /* Borde redondeado en la imagen */
-    object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor sin distorsión */
-    
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .Id_Card {
-    color: #00bfff; /* Texto azul claro */
-    font-family: 'Orbitron', sans-serif; /* Tipografía temática */
+    color: gray; /* Color azul claro para el ID */
+    font-family: 'Orbitron', sans-serif;
     margin-bottom: 10px;
+    font-size: 0.9em; /* Ajusta el tamaño del texto si es necesario */
+}
+
+.Genre_Card {
+    color: white; /* Color azul claro para el género */
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em; /* Ajusta el tamaño del texto si es necesario */
+    margin: 5px 0;
 }
 
 .Card_h4, .Name_Card {
-    color: #ffffff; /* Texto blanco */
-    font-family: 'Roboto', sans-serif; /* Tipografía más legible */
+    color: #ffffff; /* Color blanco para el rating y la fecha de lanzamiento */
+    font-family: 'Roboto', sans-serif;
     margin: 5px 0;
 }
 
 .Name_Card {
     font-size: 1.2em;
-    color: #00bfff; /* Texto azul claro */
+    color: #00bfff; /* Color azul claro para el nombre */
 }
-
-
-
-
-/*.CardsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.Card {
-    width: 200px;
-    border: solid 1px blue;
-    border-radius: 10px;
-    padding-left: 10px;
-    margin: 10px;
-    height: 320px;
-}
-
-.Card img {
-    width: 150px;
-}*/
-

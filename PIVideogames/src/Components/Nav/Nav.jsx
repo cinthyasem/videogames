@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import "./Nav.css"
 //estamos importando un metodo de react router Dom para las rutas
 import { Link } from 'react-router-dom'
 
 
-function Nav( { handleChange } ){
+function Nav( { handleChange, searchString } ){
 
     
     return (
@@ -20,7 +21,8 @@ function Nav( { handleChange } ){
             </div>
             <div> 
                 <input 
-                    onChange={handleChange}
+                    onChange= {handleChange}
+                    value= {searchString}
                     type="text"
                     className="inputNav" 
                     placeholder="Search..."
@@ -31,4 +33,9 @@ function Nav( { handleChange } ){
     )
 }
 
+//estas son validaciones para las props que le estamos pasando a nav 
+Nav.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    searchString: PropTypes.string.isRequired,
+};
 export default Nav;

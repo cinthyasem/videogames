@@ -7,7 +7,7 @@ const initialState = [];
 const gamesSlice = createSlice({
   name: 'games',
   initialState,
-  reducers: {
+  reducers: { //reducer son funciones que actualizan el edo
     setGames(state, action) {
       return action.payload;
     },
@@ -23,6 +23,7 @@ export const fetchAllVideogames = () => async (dispatch) => {
   } catch (error) {
     console.error('Error fetching videogames:', error);
   }
+  
 };
 
 export default gamesSlice.reducer;

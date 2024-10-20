@@ -2,11 +2,29 @@ import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import { useState, useEffect } from 'react';
 import './Home.css';
+import axios from 'axios';
 
 
-function Home( { searchString } ) {
+function Home( { searchString, setSearchString } ) {
     // Tomar el estado del store de redux para renderizar las cartas en el return
     const games = useSelector((state) => state.games);
+    
+    const [genres, setGenres] = useState([]);
+   
+
+    useEffect(() => {
+    axios.get('http://localhost:3001/getGenres')
+            .then(response => {
+                setGenres(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+           
+            
+        }, []);
+
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
 
     // Lógica para el paginado
     const [currentPage, setCurrentPage] = useState(1);
@@ -36,8 +54,8 @@ function Home( { searchString } ) {
         }));
     }, [searchString]);
 
-    console.log(localFilters);
-
+    
+//esta es la funcion que setea nuestro estado conel valor de los inputs
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setLocalFilters({ ...localFilters, [name]: value });
@@ -48,7 +66,7 @@ function Home( { searchString } ) {
         const { id, name, genres, platforms, minRating, maxRating, minReleased, maxReleased } = localFilters;
         
         const matchesName = game.name.toLowerCase().includes(name.toLowerCase());
-        const matchesGenre = genres === 'All' || game.genres.includes(genres);
+        const matchesGenre = genres === 'All' || game.genres?.includes(genres);
         const matchesPlatform = platforms === 'All' || game.platforms.includes(platforms);
         const matchesMinRating = minRating === '' || game.rating >= parseFloat(minRating);
         const matchesMaxRating = maxRating === '' || game.rating <= parseFloat(maxRating);
@@ -87,6 +105,35 @@ function Home( { searchString } ) {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = sortedGames.slice(indexOfFirstItem, indexOfFirstItem + itemsPerPage); 
     const totalPages = Math.ceil(sortedGames.length / itemsPerPage);
+    
+    useEffect(() => {
+        if (!isInitialLoad && currentItems.length === 0) {
+            alert("No results found.");
+            setLocalFilters({
+                id: 'All',
+                name: '',
+                genres: 'All',
+                platforms: 'All',
+                minRating: '', 
+                maxRating: '',
+                minReleased: '',
+                maxReleased: '',
+                nameOrder: 'All',
+                ratingOrder: 'All',
+            });
+            setSearchString("");
+        }
+    }, [currentItems.length, isInitialLoad]);
+    
+    // Cambiar el estado inicial después de la primera carga
+    useEffect(() => {
+        if (isInitialLoad) {
+        setIsInitialLoad(false);
+        return; 
+        }
+    }, [isInitialLoad]);
+
+
 
     // Funciones para cambiar de página
     const handleFirstPage = () => {
@@ -109,7 +156,7 @@ function Home( { searchString } ) {
         setCurrentPage(totalPages);
     };
 
-    // Reset current page to 1 whenever filters change
+    // aca reseta a current page a 1 ada vez que los filtros cambien
     useEffect(() => {
         setCurrentPage(1);
     }, [localFilters]);
@@ -134,14 +181,14 @@ function Home( { searchString } ) {
                         </div>
                     </div>
                     <div>
-                        <h3>Name</h3>
+                        <h3>Sort by Name</h3>
                         <select name="nameOrder"
                                 onChange={handleInputChange}
                                 value={localFilters.nameOrder}
                         >
                             <option value="All">All</option>
-                            <option value="Ascendente">Ascendente</option>
-                            <option value="Descendente">Descendente</option>
+                            <option value="Ascendente">Sort A-Z</option>
+                            <option value="Descendente">Sort Z-A</option>
                         </select>
 
                     </div>
@@ -154,9 +201,10 @@ function Home( { searchString } ) {
                                 value={localFilters.genres}
                             >
                                 <option>All</option>
-                                <option>Action</option>
-                                <option>RPG</option>
-                                <option>Strategy</option>
+                                {genres.map((genre) => (
+                                    <option key={genre} value={genre}>{genre}</option>
+                                ))}
+                                  
                             </select>
                         </div>
                         
@@ -167,14 +215,14 @@ function Home( { searchString } ) {
                             <input 
                                 type="date"
                                 name='minReleased'   
-                                onChange={handleInputChange} // Añadido onChange
-                                value={localFilters.minReleased} // Añadido value
+                                onChange={handleInputChange} 
+                                value={localFilters.minReleased} 
                             />
                             <input 
                                 type="date"
                                 name='maxReleased' 
-                                onChange={handleInputChange} // Añadido onChange
-                                value={localFilters.maxReleased} // Añadido value
+                                onChange={handleInputChange} 
+                                value={localFilters.maxReleased} 
                             />
                         </div>
                     </div>
@@ -185,27 +233,27 @@ function Home( { searchString } ) {
                                 type="text" 
                                 name='minRating'
                                 placeholder='minimum'
-                                onChange={handleInputChange} // Añadido onChange
-                                value={localFilters.minRating} // Añadido value
+                                onChange={handleInputChange} 
+                                value={localFilters.minRating} 
                             />
                             <input 
                                 type='text'
                                 name='maxRating'
                                 placeholder='maximum'
-                                onChange={handleInputChange} // Añadido onChange
-                                value={localFilters.maxRating} // Añadido value
+                                onChange={handleInputChange} 
+                                value={localFilters.maxRating} 
                             />
                         </div>
                         <div>
-                            <h4>Ascendente o descendente</h4>
+                            <h4>Sort by Rating</h4>
                                 <select
                                 name='ratingOrder'
                                 onChange={handleInputChange}
                                 value={localFilters.ratingOrder}
                                 >
                                 <option value="All">All</option>
-                                <option value="Ascendente">Ascendete</option> 
-                                <option value="Descendente">Descendente</option>
+                                <option value="Ascendente">Low to High</option> 
+                                <option value="Descendente">High to Low</option>
                                 </select>
                     
                         </div>
@@ -215,8 +263,8 @@ function Home( { searchString } ) {
                         <div>
                             <select 
                                 name='platforms' 
-                                onChange={handleInputChange} // Añadido onChange
-                                value={localFilters.platforms} // Añadido value
+                                onChange={handleInputChange} 
+                                value={localFilters.platforms} 
                             >
                                 <option>All</option>
                                 <option>PC</option>
@@ -243,21 +291,20 @@ function Home( { searchString } ) {
                 </div>
 
                 <div className="CardsContainer">
-                    {currentItems.length > 0 ? (
+                    {
                         currentItems.map((game) => (
                             <Card
                                 key={game.id}
                                 id={game.id}
                                 name={game.name}
                                 image={game.image}
+                                genres={game.genres}
                                 released={game.released}
                                 rating={game.rating}
                                 platforms={game.platforms}
                             />
                         ))
-                    ) : (
-                        <div className="NoContentMessage">There are no VideoGames with that name</div>
-                    )}
+                    }
                 </div>
             </div>
 
